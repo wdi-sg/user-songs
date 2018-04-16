@@ -75,5 +75,3 @@ Use `c` to continue out of the breakpoint.
 Make another request.
 
 See the value of `user_session` has been retained.
-```
-
