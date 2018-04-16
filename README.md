@@ -1,24 +1,7 @@
-# README
+# User Songs
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This rails app is a one model app that has a single `Song` model. A song has a title.
 
-Things you may want to cover:
+Your job is to implement best security practices for this app:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+User login and authorization with devise.
