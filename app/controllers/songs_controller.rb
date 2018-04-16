@@ -2,10 +2,19 @@ class SongsController < ActionController::Base
 
   def index
     @songs = Song.all
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @songs }
+    end
   end
 
   def show
     @song = Song.find(params[:id])
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @song }
+    end
   end
 
   def new
