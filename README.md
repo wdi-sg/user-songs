@@ -49,3 +49,31 @@ Restrict the new link in the songs index with the devise helper
 <%= link_to 'New Song', new_song_path %>
 <% end %>
 ```
+
+### Other devise helpers:
+
+#### current_user
+Make a breakpoint (byebug) in the `index` song controller method.
+
+Inside the console see the value of current_user
+```
+current_user.id
+```
+#### user_session
+See the current value of `user_session`
+```
+user_session
+```
+Set something in the user session
+
+```
+user_session[:song_cart] = "Single Ladies"
+```
+
+Use `c` to continue out of the breakpoint.
+
+Make another request.
+
+See the value of `user_session` has been retained.
+```
+
