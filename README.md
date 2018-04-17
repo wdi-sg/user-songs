@@ -27,17 +27,24 @@ Create the devise user model:
 rails generate devise user
 ```
 
-Generate the default devise view files:
+Link User to a new foreign key column in songs:
 ```
-rails g devise:views
+rails g migration AddUserToUploads user:references
 ```
 
 ```
 rails db:migrate
 ```
 
+Generate the default devise view files:
+```
+rails g devise:views
+```
+
+
 Devise might ask you to copy the secret devise key into the initializer file: config/initializers/devise.rb
 
+### Set up authorization:
 Add a before action filter to the controller:
 ```
 before_action :authenticate_user!, :except => [ :show, :index ]
