@@ -82,3 +82,31 @@ Use `c` to continue out of the breakpoint.
 Make another request.
 
 See the value of `user_session` has been retained.
+
+### Adding user associations
+Change both model files
+
+app/models/song.rb
+```
+belongs_to :user
+```
+
+app/models/user.rb
+```
+has_many :song
+```
+
+Assign the logged in user as the song creator in app/controllers/songs_controller.rb
+```
+def create
+  @song = Song.new(song_params)
+
+  @song.user = current_user
+
+  if @song.save
+    redirect_to @song
+  else
+    render 'new'
+  end
+end
+```
