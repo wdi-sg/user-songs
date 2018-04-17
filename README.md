@@ -17,6 +17,11 @@ Install it
 ```
 bundle install
 ```
+
+```
+rails db:create
+```
+
 Run the gem's script files so it can generate the default files in the rails app
 ```
 rails generate devise:install
@@ -109,4 +114,8 @@ def create
     render 'new'
   end
 end
+```
+### Logout Link
+```
+<%= link_to 'log out', destroy_user_session_url, method: :delete %>
 ```
