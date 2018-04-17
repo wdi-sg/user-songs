@@ -29,7 +29,7 @@ rails generate devise user
 
 Link User to a new foreign key column in songs:
 ```
-rails g migration AddUserToUploads user:references
+rails g migration AddUserToSongs user:references
 ```
 
 ```
