@@ -113,6 +113,7 @@ Check out the asset pipeline options:
 ```
 config.assets.js_compressor = :uglifier
 config.assets.css_compressor = :sass
+config.assets.digest = true
 ```
 
 See what assets precompile does:
