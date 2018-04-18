@@ -1,8 +1,30 @@
-<p>songs</p>
-<ul>
-<% @songs.each do |song| %>
-  <li><%= song.title %></li>
-<% end %>
-</ul>
+<h1>Songs</h1>
 
-<%= link_to 'New Song', new_song_path %>
+<button id="sort-button" type="button" class="btn btn-primary">Sort</button>
+
+<div class="container">
+    <div class="row">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">title</th>
+              <th scope="col">created</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @songs.each do |song| %>
+            <tr>
+              <td><%= song.id %></td>
+              <td class="song-title"><%= song.title %></td>
+              <td><%= song.created_at.strftime('%d.%m.%Y') %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+    </div>
+</div>
+
+<% if user_signed_in? %>
+  <%= button_to'New Song', new_song_path, {class: "btn btn-primary", method: :get} %>
+<% end %>

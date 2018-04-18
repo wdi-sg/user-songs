@@ -59,5 +59,9 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  config.assets.js_compressor = Uglifier.new(harmony: true)
+  config.assets.css_compressor = :sass
+  config.assets.digest = true
+
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end
