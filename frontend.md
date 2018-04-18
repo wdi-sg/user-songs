@@ -43,6 +43,8 @@ Make a nested style just for the song form
   }
 }
 ```
+## Rails Javascript
+Let's implement an index page sorting function. We won't make any ajax calls.
 
 ### Javascript vars in Rails
 
