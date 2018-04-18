@@ -1,3 +1,54 @@
+
+<div class="container">
+	<div class="jumbotron">
+		<h1 class="display-4">All the Songs!</h1>
+		<p class="lead">A list of all the songs.</p>
+		<hr class="my-4">
+		<p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+		<p class="lead">
+			<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+		</p>
+	</div>
+</div>
+
+<div class="container">
+	<div class=row>
+		<% if user_signed_in? %>
+		<%= link_to 'New Song', new_song_path %>
+		<% end %>
+	</div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <a id="sort" class="btn btn-primary btn-lg" href="#" role="button">sort</a>
+    </div>
+</div>
+
+<!-- <img src="blue-background.jpeg" alt="background"> -->
+<div class="container">
+	<div class="row">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">title</th>
+					<th scope="col">created</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @songs.each do |song| %>
+				<tr>
+					<td><%= song.id %></td>
+					<td class="song-title"><%= song.title %></td>
+					<td><%= song.created_at.strftime('%d.%m.%Y') %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
+<!-- 
 <p>songs</p>
 <ul>
 <% @songs.each do |song| %>
@@ -5,4 +56,3 @@
 <% end %>
 </ul>
 
-<%= link_to 'New Song', new_song_path %>

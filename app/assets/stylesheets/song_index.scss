@@ -1,0 +1,19 @@
+@mixin button-style {
+
+	border-top-right-radius: 10px;
+	border-top-left-radius: 0px;
+
+}
+
+
+
+.jumbotron{
+	background-image: asset-url('background.jpeg');
+	background-size: cover;
+
+	.btn {
+		color: purple;
+		@include button-style;
+	}
+}
+
