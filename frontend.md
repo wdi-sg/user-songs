@@ -1,12 +1,54 @@
 # Rails Front-end
 
+### Static assets
+
+```
+<img src="<%= image_url 'pic.jpg' %>"/>
+```
+
+![https://identitydesigned.com/images/mash/royal-mail/royal-mail-logo-6.jpg](https://identitydesigned.com/images/mash/royal-mail/royal-mail-logo-6.jpg)
+
+### Bootstrap
+
 ```
 gem 'bootstrap', '~> 4.1.0'
-gem 'gon'
 ```
 
 Install bootstrap according to the instructions
 [https://github.com/twbs/bootstrap-rubygem#a-ruby-on-rails](https://github.com/twbs/bootstrap-rubygem#a-ruby-on-rails)
+
+Let's make some changes to the new form to conform with the bootstrap form. [https://getbootstrap.com/docs/4.0/components/forms/](https://getbootstrap.com/docs/4.0/components/forms/)
+
+We'll use a color palette we pick from [https://color.adobe.com](https://color.adobe.com)
+
+### Start using some SASS features
+
+Set the colors as variables in a new file.
+```
+$text-color: #000000;
+...
+```
+
+Create a set of fonts according to this: [https://www.cssfontstack.com/](https://www.cssfontstack.com/)
+```
+$main-font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+$secondary-font-family:
+```
+
+Make a nested style just for the song form
+```
+.song-form{
+  input {
+    ...
+  }
+}
+```
+
+### Javascript vars in Rails
+
+```
+gem 'gon'
+```
 
 Add gon to the head
 ```
