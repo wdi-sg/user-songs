@@ -35,10 +35,34 @@ $main-font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 $secondary-font-family:
 ```
 
-Make a nested style just for the song form
+Add our markup
 ```
-.song-form{
-  input {
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">title</th>
+      <th scope="col">created</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @songs.each do |song| %>
+    <tr>
+      <td><%= song.id %></td>
+      <td class="song-title"><%= song.title %></td>
+      <td><%= song.created_at.strftime('%d.%m.%Y') %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+```
+
+
+
+Make a nested style just for the table
+```
+.songs-table{
+  tr {
     ...
   }
 }
@@ -71,27 +95,6 @@ gon.songs = @songs
   crossorigin="anonymous"></script>
 ```
 
-Add our markup
-```
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">title</th>
-      <th scope="col">created</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% @songs.each do |song| %>
-    <tr>
-      <td><%= song.id %></td>
-      <td class="song-title"><%= song.title %></td>
-      <td><%= song.created_at.strftime('%d.%m.%Y') %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-```
 
 Add a button to use our sorting script
 ```
@@ -108,6 +111,8 @@ var sortedRows = $('tbody tr').sort(desc);
 $('tbody').empty()
 $('tbody').append(sortedRows)
 ```
+
+## Asset Pipeline at work
 
 Check out the asset pipeline options:
 
