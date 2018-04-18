@@ -59,10 +59,11 @@ Add gon to the head
 
 Add gon to the controller
 ```
+gon.user = current_user
 gon.songs = @songs
 ```
 
-Add jquery
+### Sorting a table
 ```
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
