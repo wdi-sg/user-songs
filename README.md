@@ -1,121 +1,223 @@
-# User Songs
+# Rails Front-end
 
-This rails app is a one model app that has a single `Song` model. A song has a title.
+### Setup
 
-Your job is to implement best security practices for this app:
+Make sure you have the app running and that it has a few songs in it.
 
-User login and authorization with devise.
+Going to the index page: `http://localhost:3000` you should see a list of the songs.
 
-We will follow instuctions from the devise website:
-[https://github.com/plataformatec/devise](https://github.com/plataformatec/devise)
+### Static Assets
+Rails is smart enough to put in the proper urls when it's a SASS file.
 
-Add the gem devise to the Gemfile
+Choose an image file. Name it `pic.jpg` and put it in `app/assets/images`
+
+Output an `image_url` in the view template to see where it goes.
 ```
-gem 'devise'
+<%= image_url 'pic.jpg' %>
 ```
+
+Make an image tag with the url
+```
+<img src="<%= asset-url 'pic.jpg' %>"/>
+```
+
+### Style our songs app
+
+Implement a branding design guide in our app.
+
+This will specify things like:
+ - font type and size
+ - 3-4 brand colors
+ - logo
+![https://identitydesigned.com/images/mash/royal-mail/royal-mail-logo-6.jpg](https://identitydesigned.com/images/mash/royal-mail/royal-mail-logo-6.jpg)
+
+We'll use a color palette we pick from [https://color.adobe.com](https://color.adobe.com)
+
+### Install bootstrap
+According to the instructions:
+
+[https://github.com/twbs/bootstrap-rubygem#a-ruby-on-rails](https://github.com/twbs/bootstrap-rubygem#a-ruby-on-rails)
+
+
+Add `bootstrap` to your Gemfile:
+
+```ruby
+gem 'bootstrap', '~> 4.1.0'
+```
+
+```
+bundle install
+```
+
+Make some changes in `app/assets/stylesheets/application.css`:
+
+Take out all require statements.
+
+Import Bootstrap styles:
+
+```scss
+// Custom bootstrap variables must be set or imported *before* bootstrap.
+@import "bootstrap";
+```
+
+The available variables can be found [here](assets/stylesheets/bootstrap/_variables.scss).
+
+Make sure the file has `.scss` extension (or `.sass` for Sass syntax). If you have just generated a new Rails app,
+it may come with a `.css` file instead. If this file exists, it will be served instead of Sass, so rename it:
+
+```console
+mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss
+```
+
+> Warning: the order of the import statements matter.
+
+### bootstrap javascript & dependencies
+
+Bootstrap JavaScript depends on jQuery.
+Add the `jquery-rails` gem to your Gemfile:
+
+```ruby
+gem 'jquery-rails'
+```
+
+Bootstrap tooltips and popovers depend on [popper.js] for positioning.
+The `bootstrap` gem already depends on the
+[popper_js](https://github.com/glebm/popper_js-rubygem) gem.
+
+Add Bootstrap dependencies and Bootstrap to your `application.js`:
+
+```js
+//= require jquery3
+//= require popper
+//= require bootstrap-sprockets
+```
+
+
+#### Song New Form:
+Let's make some changes to the new form to conform with the bootstrap form. [https://getbootstrap.com/docs/4.0/components/forms/](https://getbootstrap.com/docs/4.0/components/forms/)
+
+Write styles in a new `.scss` file.
+Import the file in the `application.scss` file.
+
+
+#### Song New Form:
+Let's make some changes to the new form to conform with the bootstrap form. [https://getbootstrap.com/docs/4.0/components/forms/](https://getbootstrap.com/docs/4.0/components/forms/)
+
+You shouldn't need any additional styles for this page if your markup and classes use bootstrap.
+
+### Ruby variables in javascript
+Add it to your gemfile
+```
+gem 'gon'
+```
+
 Install it
 ```
 bundle install
 ```
 
+Add gon inside the head tag
 ```
-rails db:create
-```
-
-Run the gem's script files so it can generate the default files in the rails app
-```
-rails generate devise:install
+<%= include_gon %>
 ```
 
-Create the devise user model:
+Add gon to the controller
 ```
-rails generate devise user
-```
-
-Link User to a new foreign key column in songs:
-```
-rails g migration AddUserToSongs user:references
+gon.songs = @songs
 ```
 
+put a javascript file in the javascripts dir. Rails automatically includes it.
 ```
-rails db:migrate
-```
-
-Generate the default devise view files:
-```
-rails g devise:views
+touch app/assets/javascripts/variables.js
 ```
 
 
-Devise might ask you to copy the secret devise key into the initializer file: config/initializers/devise.rb
-
-### Set up authorization:
-Add a before action filter to the controller:
 ```
-before_action :authenticate_user!, :except => [ :show, :index ]
+alert( gon.songs[0].title );
 ```
 
-Restrict the new link in the songs index with the devise helper
+### Javascript in rails
+
+Let's write javascript to sort our songs inside the browser.
+
+Add our markup
 ```
-<% if user_signed_in? %>
-<%= link_to 'New Song', new_song_path %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">title</th>
+          <th scope="col">created</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @songs.each do |song| %>
+        <tr>
+          <td><%= song.id %></td>
+          <td class="song-title"><%= song.title %></td>
+          <td><%= song.created_at.strftime('%d.%m.%Y') %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 ```
 
-### Other devise helpers:
-
-#### current_user
-Make a breakpoint (byebug) in the `index` song controller method.
-
-Inside the console see the value of current_user
+Add a button to use our sorting script
 ```
-current_user.id
-```
-#### user_session
-See the current value of `user_session`
-```
-user_session
-```
-Set something in the user session
-
-```
-user_session[:song_cart] = "Single Ladies"
+<button id="submit" type="button" class="btn">sort</button>
 ```
 
-Use `c` to continue out of the breakpoint.
-
-Make another request.
-
-See the value of `user_session` has been retained.
-
-### Adding user associations
-Change both model files
-
-app/models/song.rb
+Add the javascript html sorting function:
 ```
-belongs_to :user
+var doSort = function(){
+  var desc = function(a,b){
+    return $(b).children('.song-title').text() < $(a).children('.song-title').text();
+  };
+
+  var asc = function(a,b){
+    return $(b).children('.song-title').text() > $(a).children('.song-title').text();
+  };
+
+  var sortedRows = $('tbody tr').sort(desc);
+
+  $('tbody').empty()
+  $('tbody').append(sortedRows)
+
+};
 ```
 
-app/models/user.rb
+Add the listener:
 ```
-has_many :song
+window.onload = function(){
+  $('#submit').click(doSort);
+};
 ```
 
-Assign the logged in user as the song creator in app/controllers/songs_controller.rb
-```
-def create
-  @song = Song.new(song_params)
+### Asset Pipeline
 
-  @song.user = current_user
+Check out the asset pipeline options:
+Switch each of these and see how your assets change.
 
-  if @song.save
-    redirect_to @song
-  else
-    render 'new'
-  end
-end
+When this option is true, digests will be generated for asset URLs.
 ```
-### Logout Link
+config.assets.digest = false
 ```
-<%= link_to 'log out', destroy_user_session_url, method: :delete %>
+
+When debug mode is off, Sprockets concatenates and runs the necessary preprocessors on all files. With debug mode turned off the manifest above would generate instead:
+```
+config.assets.debug = false
+```
+
+See what assets precompile does:
+```
+rails assets:precompile
+```
+
+Look in the place where rails *actually* serves the compiled assets from:
+```
+ls -la public/assets
 ```
