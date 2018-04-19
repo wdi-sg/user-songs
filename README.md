@@ -1,4 +1,5 @@
 # Rails Front-end
+We will be using SASS to help us use the bootstrap CSS library in Rails.
 
 ### Setup
 
@@ -60,8 +61,6 @@ Import Bootstrap styles:
 @import "bootstrap";
 ```
 
-The available variables can be found [here](assets/stylesheets/bootstrap/_variables.scss).
-
 Make sure the file has `.scss` extension (or `.sass` for Sass syntax). If you have just generated a new Rails app,
 it may come with a `.css` file instead. If this file exists, it will be served instead of Sass, so rename it:
 
@@ -91,6 +90,12 @@ Add Bootstrap dependencies and Bootstrap to your `application.js`:
 //= require popper
 //= require bootstrap-sprockets
 ```
+
+### Style Our App
+Use SASS to style our pages. Gitbook page here:[https://wdi-sg.github.io/gitbook-2018/06-ruby-rails/additional-topics/sass/readme.html](https://wdi-sg.github.io/gitbook-2018/06-ruby-rails/additional-topics/sass/readme.html)
+
+The available variables can be found [here](assets/stylesheets/bootstrap/_variables.scss).
+
 
 #### Song New Form:
 Let's make some changes to the new form to conform with the bootstrap form. [https://getbootstrap.com/docs/4.0/components/forms/](https://getbootstrap.com/docs/4.0/components/forms/)
