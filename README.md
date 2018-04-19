@@ -18,7 +18,7 @@ Output an `image_url` in the view template to see where it goes.
 
 Make an image tag with the url
 ```
-<img src="<%= asset-url 'pic.jpg' %>"/>
+<img src="<%= image_url 'pic.jpg' %>"/>
 ```
 
 ### Style our songs app
@@ -92,18 +92,24 @@ Add Bootstrap dependencies and Bootstrap to your `application.js`:
 //= require bootstrap-sprockets
 ```
 
-
-#### Song New Form:
-Let's make some changes to the new form to conform with the bootstrap form. [https://getbootstrap.com/docs/4.0/components/forms/](https://getbootstrap.com/docs/4.0/components/forms/)
-
-Write styles in a new `.scss` file.
-Import the file in the `application.scss` file.
-
-
 #### Song New Form:
 Let's make some changes to the new form to conform with the bootstrap form. [https://getbootstrap.com/docs/4.0/components/forms/](https://getbootstrap.com/docs/4.0/components/forms/)
 
 You shouldn't need any additional styles for this page if your markup and classes use bootstrap.
+
+#### Song Index Page
+Make the top part of our index page a bootstrap jumbotron: [https://getbootstrap.com/docs/4.0/components/jumbotron/](https://getbootstrap.com/docs/4.0/components/jumbotron/)
+
+Make sure it has a `container` and `row` bootstrap class `div` around it. (like the table markup below)
+
+In `app/assets/stylesheets` make a new stylesheet `song-index.scss` and import it in `application.scss`.
+
+In the new SASS file set a background image for the jumbotron. SASS and Rails are smart enough to put figure out that you want an asset image in your css:
+```
+background-image: asset-url('pic.jpg');
+```
+
+You can also use one from [unsplash.it](https://unsplash.it)
 
 ### Ruby variables in javascript
 Add it to your gemfile
