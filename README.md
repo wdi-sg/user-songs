@@ -3,7 +3,9 @@ We will be using SASS to help us use the bootstrap CSS library in Rails.
 
 ### Setup
 
-Make sure you have the app running and that it has a few songs in it.
+Make sure you have the app running. Add a few songs in it. (All the add/insert functionality should already work)
+
+The index page should display a list of songs.
 
 Going to the index page: `http://localhost:3000` you should see a list of the songs.
 
@@ -91,11 +93,64 @@ Add Bootstrap dependencies and Bootstrap to your `application.js`:
 //= require bootstrap-sprockets
 ```
 
+### Asset Pipeline
+
+Check out the asset pipeline options:
+Switch each of these and see how your assets change.
+
+When this option is true, digests will be generated for asset URLs.
+```
+config.assets.digest = false
+```
+
+When debug mode is off, Sprockets concatenates and runs the necessary preprocessors on all files. With debug mode turned off the manifest above would generate instead:
+```
+config.assets.debug = false
+```
+
+See what assets precompile does:
+```
+rails assets:precompile
+```
+
+Look in the place where rails *actually* serves the compiled assets from:
+```
+ls -la public/assets
+```
+
+
 ### Style Our App
 Use SASS to style our pages. Gitbook page here:[https://wdi-sg.github.io/gitbook-2018/06-ruby-rails/additional-topics/sass/readme.html](https://wdi-sg.github.io/gitbook-2018/06-ruby-rails/additional-topics/sass/readme.html)
 
 The available variables can be found [here](assets/stylesheets/bootstrap/_variables.scss).
 
+### Bootstrapify the song list.
+
+app/views/songs/index.html.erb
+```
+<div class="container">
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">title</th>
+          <th scope="col">created</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @songs.each do |song| %>
+        <tr>
+          <td><%= song.id %></td>
+          <td class="song-title"><%= song.title %></td>
+          <td><%= song.created_at.strftime('%d.%m.%Y') %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+```
 
 #### Song New Form:
 Let's make some changes to the new form to conform with the bootstrap form. [https://getbootstrap.com/docs/4.0/components/forms/](https://getbootstrap.com/docs/4.0/components/forms/)
@@ -139,7 +194,7 @@ gon.songs = @songs
 
 put a javascript file in the javascripts dir. Rails automatically includes it.
 ```
-touch app/assets/javascripts/variables.js
+touch app/assets/javascripts/testing.js
 ```
 
 
@@ -151,84 +206,18 @@ alert( gon.songs[0].title );
 
 Let's write javascript to sort our songs inside the browser.
 
-Add our markup
-```
-<div class="container">
-  <div class="row">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">title</th>
-          <th scope="col">created</th>
-        </tr>
-      </thead>
-      <tbody>
-      <% @songs.each do |song| %>
-        <tr>
-          <td><%= song.id %></td>
-          <td class="song-title"><%= song.title %></td>
-          <td><%= song.created_at.strftime('%d.%m.%Y') %></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
-```
-
-Add a button to use our sorting script
+Add a button
 ```
 <button id="submit" type="button" class="btn">sort</button>
 ```
 
-Add the javascript html sorting function:
-```
-var doSort = function(){
-  var desc = function(a,b){
-    return $(b).children('.song-title').text() < $(a).children('.song-title').text();
-  };
-
-  var asc = function(a,b){
-    return $(b).children('.song-title').text() > $(a).children('.song-title').text();
-  };
-
-  var sortedRows = $('tbody tr').sort(desc);
-
-  $('tbody').empty()
-  $('tbody').append(sortedRows)
-
-};
-```
-
 Add the listener:
 ```
+var doSort = function(){
+  alert("hello!");
+};
+
 window.onload = function(){
   $('#submit').click(doSort);
 };
-```
-
-### Asset Pipeline
-
-Check out the asset pipeline options:
-Switch each of these and see how your assets change.
-
-When this option is true, digests will be generated for asset URLs.
-```
-config.assets.digest = false
-```
-
-When debug mode is off, Sprockets concatenates and runs the necessary preprocessors on all files. With debug mode turned off the manifest above would generate instead:
-```
-config.assets.debug = false
-```
-
-See what assets precompile does:
-```
-rails assets:precompile
-```
-
-Look in the place where rails *actually* serves the compiled assets from:
-```
-ls -la public/assets
 ```
