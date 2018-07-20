@@ -94,18 +94,19 @@ Add Bootstrap dependencies and Bootstrap to your `application.js`:
 ```
 
 ### Asset Pipeline
+Inside of your config file: `config/environments/development.rb`:
 
 Check out the asset pipeline options:
 Switch each of these and see how your assets change.
 
-When this option is true, digests will be generated for asset URLs.
-```
-config.assets.digest = false
-```
-
 When debug mode is off, Sprockets concatenates and runs the necessary preprocessors on all files. With debug mode turned off the manifest above would generate instead:
 ```
 config.assets.debug = false
+```
+
+When this option is true, digests will be generated for asset URLs. Put this option in to see what happens.
+```
+config.assets.digest = false
 ```
 
 See what assets precompile does:
