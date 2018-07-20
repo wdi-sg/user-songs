@@ -1,8 +1,18 @@
-<p>songs</p>
-<ul>
-<% @songs.each do |song| %>
+<h1 class='h1tag'>Your Playlist</h1>
+
+<div class='centering'><%= image_tag "image.jpeg", class: "image" %></div>
+
+<ul class='list'>
+<% @selected.each do |song| %>
   <li><%= song.title %></li>
 <% end %>
 </ul>
 
+
 <%= link_to 'New Song', new_song_path %>
+
+<div class='centering'>
+<button type="button" class="btn btn-default"><%= link_to 'log out', destroy_user_session_url, method: :delete %></button>
+</div>
+
+<%= link_to 'Login', new_user_session_path %>

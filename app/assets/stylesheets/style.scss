@@ -1,0 +1,26 @@
+$color-primary: green;
+
+body{
+    background-color: $color-primary;
+}
+.h1tag{
+    color: white;
+    text-align: center;
+}
+.list{
+    margin:0;
+    padding:0;
+    text-align: center;
+    list-style: none;
+}
+.centering {
+    margin-top: 30px;
+    text-align: center;
+}
+.btn{
+    color:black;
+}
+.image{
+    width:50%;
+    height:50%;
+}
