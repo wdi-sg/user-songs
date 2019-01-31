@@ -26,15 +26,15 @@ Make an image tag with the url
 
 ### Style our songs app
 
-Implement a branding design guide in our app.
+Implement a branding design guide in our app- these are styles that are consistent for the entire site.
+ 
+![branding guide example](https://identitydesigned.com/images/mash/royal-mail/royal-mail-logo-6.jpg)
 
-This will specify things like:
+This guide will specify things like:
  - font type and size
- - 3-4 brand colors
- - logo
-![https://identitydesigned.com/images/mash/royal-mail/royal-mail-logo-6.jpg](https://identitydesigned.com/images/mash/royal-mail/royal-mail-logo-6.jpg)
+ - 3-4 "brand" colors
 
-We'll use a color palette we pick from [https://color.adobe.com](https://color.adobe.com)
+You can create a color palette from [https://color.adobe.com](https://color.adobe.com)
 
 ### Install bootstrap
 According to the instructions:
@@ -54,7 +54,7 @@ bundle install
 
 Make some changes in `app/assets/stylesheets/application.css`:
 
-Take out all require statements.
+Take out all require statements. ( they look like comments, but they are actually looked at by the pipeline system)
 
 Import Bootstrap styles:
 
