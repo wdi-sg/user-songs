@@ -172,40 +172,7 @@ background-image: asset-url('pic.jpg');
 
 You can also use one from [unsplash.it](https://unsplash.it)
 
-### Ruby variables in javascript
-Add it to your gemfile
-```
-gem 'gon'
-```
-
-Install it
-```
-bundle install
-```
-
-Add gon inside the head tag
-```
-<%= include_gon %>
-```
-
-Add gon to the controller
-```
-gon.songs = @songs
-```
-
-put a javascript file in the javascripts dir. Rails automatically includes it.
-```
-touch app/assets/javascripts/testing.js
-```
-
-
-```
-alert( gon.songs[0].title );
-```
-
 ### Javascript in rails
-
-Let's write javascript to sort our songs inside the browser.
 
 Add a button
 ```
