@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 class SongsController < ApplicationController
+  before_action :authenticate_user!, except: %i[show index]
 
   def index
     @songs = Song.all
@@ -10,7 +13,7 @@ class SongsController < ApplicationController
 
   def show
     @song = Song.find(params[:id])
-    
+
     respond_to do |format|
       format.html
       format.json { render json: @song }
@@ -27,6 +30,8 @@ class SongsController < ApplicationController
 
   def create
     @song = Song.new(song_params)
+
+    @song.user = current_user
 
     if @song.save
       redirect_to @song
@@ -53,7 +58,8 @@ class SongsController < ApplicationController
   end
 
   private
-    def song_params
-      params.require(:song).permit(:title)
-    end
+
+  def song_params
+    params.require(:song).permit(:title)
+  end
 end

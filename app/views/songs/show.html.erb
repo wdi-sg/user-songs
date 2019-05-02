@@ -1,5 +1,6 @@
 <p>Song:</p>
 <p>
-  <%= @song.title %>
+	<%= @song.title %>
 </p>
 <%= link_to 'Back', songs_path %>
+<%= link_to 'log out', destroy_user_session_url, method: :delete %>

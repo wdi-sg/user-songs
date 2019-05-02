@@ -1,8 +1,10 @@
 <p>songs</p>
 <ul>
-<% @songs.each do |song| %>
-  <li><%= song.title %></li>
-<% end %>
+	<% @songs.each do |song| %>
+		<li><%= song.title %></li>
+	<% end %>
 </ul>
-
-<%= link_to 'New Song', new_song_path %>
+<% if user_signed_in? %>
+	<%= link_to 'New Song', new_song_path %>
+<% end %>
+<%= link_to 'log out', destroy_user_session_url, method: :delete %>
