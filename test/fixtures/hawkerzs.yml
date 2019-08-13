@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  address: MyText
+  food_genre: MyText
+  ratings: 1.5
+  vegetarian: false
+  muslim: false
+  seating: 1
+
+two:
+  name: MyString
+  address: MyText
+  food_genre: MyText
+  ratings: 1.5
+  vegetarian: false
+  muslim: false
+  seating: 1
